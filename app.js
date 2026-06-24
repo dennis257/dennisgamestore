@@ -1,101 +1,68 @@
 /* ─────────────────────────────────────────────────────────────
-   GAME DATA  (no emoji icons — art rendered via CSS cover classes)
+   CONFIG
 ───────────────────────────────────────────────────────────── */
-const GAMES = [
-  {
-    id: 1,  title: "Shadow Realm",         genre: "action",   price: 29.99, sale: null,
-    rating: 4.7, reviews: "8.2k", platforms: ["PC","PS5"],
-    badge: "top",
-    desc: "Hack-and-slash through a brutal dark fantasy world with 60+ hours of content."
-  },
-  {
-    id: 2,  title: "Starfall Odyssey",     genre: "rpg",      price: 49.99, sale: 34.99,
-    rating: 4.9, reviews: "21k", platforms: ["PC","Xbox","PS5"],
-    badge: "sale",
-    desc: "Epic space RPG with a branching narrative and hundreds of hours of story."
-  },
-  {
-    id: 3,  title: "Iron Fortress",        genre: "strategy", price: 24.99, sale: null,
-    rating: 4.5, reviews: "5.1k", platforms: ["PC"],
-    badge: null,
-    desc: "Build, defend, and conquer in this sweeping grand strategy experience."
-  },
-  {
-    id: 4,  title: "Velocity Rush",        genre: "sports",   price: 19.99, sale: null,
-    rating: 4.6, reviews: "14k",  platforms: ["PC","PS5","Xbox"],
-    badge: "new",
-    desc: "Blazing-fast arcade racing across 40 hand-crafted tracks worldwide."
-  },
-  {
-    id: 5,  title: "Pixel Dungeon Pro",    genre: "indie",    price: 9.99,  sale: null,
-    rating: 4.8, reviews: "33k",  platforms: ["PC"],
-    badge: "top",
-    desc: "Roguelike madness with procedurally generated levels and brutal difficulty."
-  },
-  {
-    id: 6,  title: "Dragon's Wrath",       genre: "action",   price: 39.99, sale: 27.99,
-    rating: 4.6, reviews: "9.8k", platforms: ["PC","PS5"],
-    badge: "sale",
-    desc: "Slay legendary dragons and claim ancient relics in this action RPG epic."
-  },
-  {
-    id: 7,  title: "Chrono Empire",        genre: "strategy", price: 34.99, sale: null,
-    rating: 4.4, reviews: "4.3k", platforms: ["PC"],
-    badge: null,
-    desc: "Command armies across centuries of history in this strategic masterpiece."
-  },
-  {
-    id: 8,  title: "Neon Streets",         genre: "action",   price: 44.99, sale: null,
-    rating: 4.8, reviews: "18k",  platforms: ["PC","PS5","Xbox"],
-    badge: "new",
-    desc: "Open-world action in a rain-soaked urban sprawl. 100+ missions."
-  },
-  {
-    id: 9,  title: "Legends United",       genre: "sports",   price: 59.99, sale: 49.99,
-    rating: 4.5, reviews: "29k",  platforms: ["PC","PS5","Xbox"],
-    badge: "sale",
-    desc: "The definitive football simulation — global leagues, live rosters, deep career mode."
-  },
-  {
-    id: 10, title: "Mystic Quest",         genre: "rpg",      price: 39.99, sale: null,
-    rating: 4.7, reviews: "11k",  platforms: ["PC","Switch"],
-    badge: null,
-    desc: "Classic JRPG with a heartfelt story, turn-based combat, and gorgeous art."
-  },
-  {
-    id: 11, title: "Tiny World Builder",   genre: "indie",    price: 14.99, sale: null,
-    rating: 4.9, reviews: "7.6k", platforms: ["PC","Mac"],
-    badge: "top",
-    desc: "Design, sculpt, and share miniature worlds in this serene sandbox creator."
-  },
-  {
-    id: 12, title: "Galactic Command",     genre: "strategy", price: 44.99, sale: 29.99,
-    rating: 4.6, reviews: "6.2k", platforms: ["PC"],
-    badge: "sale",
-    desc: "Real-time space strategy at breathtaking scale — build fleets, conquer galaxies."
-  },
-  {
-    id: 99, title: "Cyber Chronicles: Ultimate Edition", genre: "rpg", price: 79.99, sale: 29.99,
-    rating: 4.9, reviews: "12.8k", platforms: ["PC","PS5","Xbox"],
-    badge: "sale",
-    desc: "Definitive open-world RPG — all DLC and expansions included."
-  },
-];
-
-const NEW_RELEASE_IDS  = [8, 4, 2, 11, 1, 10];
-const DEAL_IDS         = [2, 6, 9, 12];
-
-let cart = [];
-let activeGenre = "all";
-let searchQuery = "";
+// When running via `node server.js`, games come from the API.
+// When opening index.html directly (no server), we fall back to
+// the bundled GAMES array so the site still works offline.
+const API_BASE = window.location.port === '3000'
+  ? 'http://localhost:3000'
+  : null;
 
 /* ─────────────────────────────────────────────────────────────
-   COVER ART HELPER — renders the CSS cover block
+   FALLBACK GAME DATA (used when no backend is running)
 ───────────────────────────────────────────────────────────── */
-function coverArt(id, extraClass = "") {
-  return `<div class="cover-${id} ${extraClass}" style="width:100%;height:100%">
-    <div class="cover-label"><div class="cover-label-title"></div></div>
-  </div>`;
+const FALLBACK_GAMES = [
+  { id: 1,  title: "Shadow Realm",        genre: "action",   price: 29.99, sale: null,  rating: 4.7, reviews: "8.2k",  platforms: ["PC","PS5"],       badge: "top",  desc: "Hack-and-slash through a brutal dark fantasy world with 60+ hours of content." },
+  { id: 2,  title: "Starfall Odyssey",    genre: "rpg",      price: 49.99, sale: 34.99, rating: 4.9, reviews: "21k",   platforms: ["PC","Xbox","PS5"], badge: "sale", desc: "Epic space RPG with a branching narrative and hundreds of hours of story." },
+  { id: 3,  title: "Iron Fortress",       genre: "strategy", price: 24.99, sale: null,  rating: 4.5, reviews: "5.1k",  platforms: ["PC"],              badge: null,   desc: "Build, defend, and conquer in this sweeping grand strategy experience." },
+  { id: 4,  title: "Velocity Rush",       genre: "sports",   price: 19.99, sale: null,  rating: 4.6, reviews: "14k",   platforms: ["PC","PS5","Xbox"], badge: "new",  desc: "Blazing-fast arcade racing across 40 hand-crafted tracks worldwide." },
+  { id: 5,  title: "Pixel Dungeon Pro",   genre: "indie",    price: 9.99,  sale: null,  rating: 4.8, reviews: "33k",   platforms: ["PC"],              badge: "top",  desc: "Roguelike madness with procedurally generated levels and brutal difficulty." },
+  { id: 6,  title: "Dragon's Wrath",      genre: "action",   price: 39.99, sale: 27.99, rating: 4.6, reviews: "9.8k",  platforms: ["PC","PS5"],        badge: "sale", desc: "Slay legendary dragons and claim ancient relics in this action RPG epic." },
+  { id: 7,  title: "Chrono Empire",       genre: "strategy", price: 34.99, sale: null,  rating: 4.4, reviews: "4.3k",  platforms: ["PC"],              badge: null,   desc: "Command armies across centuries of history in this strategic masterpiece." },
+  { id: 8,  title: "Neon Streets",        genre: "action",   price: 44.99, sale: null,  rating: 4.8, reviews: "18k",   platforms: ["PC","PS5","Xbox"], badge: "new",  desc: "Open-world action in a rain-soaked urban sprawl. 100+ missions." },
+  { id: 9,  title: "Legends United",      genre: "sports",   price: 59.99, sale: 49.99, rating: 4.5, reviews: "29k",   platforms: ["PC","PS5","Xbox"], badge: "sale", desc: "The definitive football simulation — global leagues, live rosters, deep career mode." },
+  { id: 10, title: "Mystic Quest",        genre: "rpg",      price: 39.99, sale: null,  rating: 4.7, reviews: "11k",   platforms: ["PC","Switch"],     badge: null,   desc: "Classic JRPG with a heartfelt story, turn-based combat, and gorgeous art." },
+  { id: 11, title: "Tiny World Builder",  genre: "indie",    price: 14.99, sale: null,  rating: 4.9, reviews: "7.6k",  platforms: ["PC","Mac"],        badge: "top",  desc: "Design, sculpt, and share miniature worlds in this serene sandbox creator." },
+  { id: 12, title: "Galactic Command",    genre: "strategy", price: 44.99, sale: 29.99, rating: 4.6, reviews: "6.2k",  platforms: ["PC"],              badge: "sale", desc: "Real-time space strategy at breathtaking scale — build fleets, conquer galaxies." },
+  { id: 99, title: "Cyber Chronicles: Ultimate Edition", genre: "rpg", price: 79.99, sale: 29.99, rating: 4.9, reviews: "12.8k", platforms: ["PC","PS5","Xbox"], badge: "sale", desc: "Definitive open-world RPG — all DLC and expansions included." },
+];
+
+const NEW_RELEASE_IDS = [8, 4, 2, 11, 1, 10];
+const DEAL_IDS        = [2, 6, 9, 12];
+
+let ALL_GAMES    = [];
+let cart         = [];
+let activeGenre  = "all";
+let searchQuery  = "";
+
+/* ─────────────────────────────────────────────────────────────
+   LOAD GAMES
+───────────────────────────────────────────────────────────── */
+async function loadGames() {
+  if (API_BASE) {
+    try {
+      const res = await fetch(`${API_BASE}/api/games`);
+      if (!res.ok) throw new Error('API error');
+      ALL_GAMES = await res.json();
+      console.log(`Loaded ${ALL_GAMES.length} games from API.`);
+    } catch (err) {
+      console.warn('Could not reach API, using fallback data.', err);
+      ALL_GAMES = FALLBACK_GAMES;
+    }
+  } else {
+    ALL_GAMES = FALLBACK_GAMES;
+  }
+
+  renderNewReleases();
+  renderDeals();
+  renderBrowse();
+}
+
+/* ─────────────────────────────────────────────────────────────
+   COVER ART HELPER
+───────────────────────────────────────────────────────────── */
+function coverDiv(id) {
+  return `<div class="cover-${id}" style="width:100%;height:100%"></div>`;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -103,17 +70,19 @@ function coverArt(id, extraClass = "") {
 ───────────────────────────────────────────────────────────── */
 function renderNewReleases() {
   const shelf = document.getElementById("newReleasesShelf");
-  const games = NEW_RELEASE_IDS.map(id => GAMES.find(g => g.id === id)).filter(Boolean);
+  const games = NEW_RELEASE_IDS
+    .map(id => ALL_GAMES.find(g => g.id === id))
+    .filter(Boolean);
 
   shelf.innerHTML = games.map(g => {
     const price = g.sale ?? g.price;
     const discountPct = g.sale ? Math.round((1 - g.sale / g.price) * 100) : 0;
-    const origHtml = g.sale ? `<span class="orig">$${g.price.toFixed(2)}</span>` : "";
+    const origHtml  = g.sale ? `<span class="orig">$${g.price.toFixed(2)}</span>` : "";
     const discBadge = g.sale ? `<div class="p-card-discount">−${discountPct}%</div>` : "";
     return `
       <div class="p-card" onclick="addToCartById(${g.id})">
         <div class="p-card-art">
-          <div class="cover-${g.id}" style="width:100%;height:100%"></div>
+          ${coverDiv(g.id)}
           ${discBadge}
         </div>
         <div class="p-card-info">
@@ -133,13 +102,15 @@ function renderNewReleases() {
 ───────────────────────────────────────────────────────────── */
 function renderDeals() {
   const grid = document.getElementById("dealsGrid");
-  const games = DEAL_IDS.map(id => GAMES.find(g => g.id === id)).filter(Boolean);
+  const games = DEAL_IDS
+    .map(id => ALL_GAMES.find(g => g.id === id))
+    .filter(g => g && g.sale);
 
   grid.innerHTML = games.map(g => {
     const pct = Math.round((1 - g.sale / g.price) * 100);
     return `
       <div class="deal-row" onclick="addToCartById(${g.id})">
-        <div class="deal-art"><div class="cover-${g.id}" style="width:100%;height:100%"></div></div>
+        <div class="deal-art">${coverDiv(g.id)}</div>
         <div class="deal-info">
           <div class="deal-title">${g.title}</div>
           <div class="deal-genre">${g.genre}</div>
@@ -160,9 +131,9 @@ function renderDeals() {
 ───────────────────────────────────────────────────────────── */
 function renderBrowse() {
   const grid = document.getElementById("browseGrid");
-  const filtered = GAMES.filter(g => {
+  const filtered = ALL_GAMES.filter(g => {
     if (g.id === 99) return false;
-    const matchGenre = activeGenre === "all" || g.genre === activeGenre;
+    const matchGenre  = activeGenre === "all" || g.genre === activeGenre;
     const matchSearch = !searchQuery ||
       g.title.toLowerCase().includes(searchQuery) ||
       g.genre.toLowerCase().includes(searchQuery);
@@ -175,18 +146,16 @@ function renderBrowse() {
   }
 
   grid.innerHTML = filtered.map(g => {
-    const price = g.sale ?? g.price;
+    const price      = g.sale ?? g.price;
     const discountPct = g.sale ? Math.round((1 - g.sale / g.price) * 100) : 0;
 
     let badgeHtml = "";
-    if (g.badge === "sale")  badgeHtml = `<span class="bcbadge bcbadge-sale">−${discountPct}%</span>`;
-    else if (g.badge === "new")  badgeHtml = `<span class="bcbadge bcbadge-new">New</span>`;
-    else if (g.badge === "top")  badgeHtml = `<span class="bcbadge bcbadge-top">Top Rated</span>`;
+    if (g.badge === "sale") badgeHtml = `<span class="bcbadge bcbadge-sale">−${discountPct}%</span>`;
+    else if (g.badge === "new") badgeHtml = `<span class="bcbadge bcbadge-new">New</span>`;
+    else if (g.badge === "top") badgeHtml = `<span class="bcbadge bcbadge-top">Top Rated</span>`;
 
-    const platsHtml = g.platforms.slice(0, 2).map(p =>
-      `<span class="b-card-plat">${p}</span>`
-    ).join("");
-
+    const platsHtml = (g.platforms || []).slice(0, 2)
+      .map(p => `<span class="b-card-plat">${p}</span>`).join("");
     const origHtml = g.sale ? `<span class="orig">$${g.price.toFixed(2)}</span>` : "";
 
     return `
@@ -218,7 +187,7 @@ function renderBrowse() {
    CART
 ───────────────────────────────────────────────────────────── */
 function addToCartById(id) {
-  const g = GAMES.find(x => x.id === id);
+  const g = ALL_GAMES.find(x => x.id === id);
   if (!g) return;
   if (cart.find(c => c.id === id)) { showToast("Already in your cart"); return; }
   cart.push({ ...g, cartPrice: g.sale ?? g.price });
@@ -267,7 +236,7 @@ function syncCart() {
   document.getElementById("cartTotal").textContent    = `$${total.toFixed(2)}`;
 }
 
-function openCart() {
+function openCart()  {
   document.getElementById("cartDrawer").classList.add("open");
   document.getElementById("cartOverlay").classList.add("open");
   document.body.style.overflow = "hidden";
@@ -276,6 +245,46 @@ function closeCart() {
   document.getElementById("cartDrawer").classList.remove("open");
   document.getElementById("cartOverlay").classList.remove("open");
   document.body.style.overflow = "";
+}
+
+/* ─────────────────────────────────────────────────────────────
+   CHECKOUT — posts order to API
+───────────────────────────────────────────────────────────── */
+async function checkout() {
+  if (!cart.length) { showToast("Your cart is empty"); return; }
+
+  const btn = document.getElementById("checkoutBtn");
+  btn.disabled = true;
+  btn.textContent = "Placing order…";
+
+  const orderItems = cart.map(g => ({
+    id: g.id,
+    title: g.title,
+    cartPrice: g.cartPrice,
+  }));
+
+  try {
+    if (API_BASE) {
+      const res = await fetch(`${API_BASE}/api/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: "customer@example.com", items: orderItems }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Order failed");
+      console.log("Order saved:", data);
+    }
+    closeCart();
+    cart = [];
+    syncCart();
+    showToast("Order placed! Check your email for your keys.");
+  } catch (err) {
+    console.error(err);
+    showToast("Something went wrong. Please try again.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Proceed to Checkout";
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -298,8 +307,8 @@ function startTimer() {
   function tick() {
     if (s <= 0) s = 86400;
     s--;
-    const h = String(Math.floor(s / 3600)).padStart(2, "0");
-    const m = String(Math.floor((s % 3600) / 60)).padStart(2, "0");
+    const h   = String(Math.floor(s / 3600)).padStart(2, "0");
+    const m   = String(Math.floor((s % 3600) / 60)).padStart(2, "0");
     const sec = String(s % 60).padStart(2, "0");
     el.textContent = `${h}:${m}:${sec}`;
   }
@@ -313,14 +322,7 @@ function startTimer() {
 document.getElementById("cartBtn").addEventListener("click", openCart);
 document.getElementById("closeCart").addEventListener("click", closeCart);
 document.getElementById("cartOverlay").addEventListener("click", closeCart);
-
-document.getElementById("checkoutBtn").addEventListener("click", () => {
-  if (!cart.length) { showToast("Your cart is empty"); return; }
-  closeCart();
-  cart = [];
-  syncCart();
-  showToast("Order placed — check your email for your keys!");
-});
+document.getElementById("checkoutBtn").addEventListener("click", checkout);
 
 document.getElementById("searchInput").addEventListener("input", e => {
   searchQuery = e.target.value.trim().toLowerCase();
@@ -339,8 +341,6 @@ document.getElementById("filterTabs").addEventListener("click", e => {
 /* ─────────────────────────────────────────────────────────────
    INIT
 ───────────────────────────────────────────────────────────── */
-renderNewReleases();
-renderDeals();
-renderBrowse();
+loadGames();
 syncCart();
 startTimer();

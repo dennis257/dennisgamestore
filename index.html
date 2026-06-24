@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dennis Game Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo" href="#">🎮 DennisGames</a>
+    <div class="nav-links">
+      <a href="#games">Games</a>
+      <a href="#featured">Featured</a>
+      <a href="#about">About</a>
+    </div>
+    <div class="nav-right">
+      <input class="search" type="text" id="searchInput" placeholder="Search games..." />
+      <button class="cart-btn" id="cartBtn">🛒 <span id="cartCount">0</span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Your Next Adventure Starts Here</h1>
+      <p>Discover thousands of games at unbeatable prices.</p>
+      <a href="#games" class="btn-primary">Browse Games</a>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section class="filter-bar" id="games">
+    <div class="container">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" data-genre="all">All</button>
+      <button class="filter-btn" data-genre="action">Action</button>
+      <button class="filter-btn" data-genre="rpg">RPG</button>
+      <button class="filter-btn" data-genre="strategy">Strategy</button>
+      <button class="filter-btn" data-genre="sports">Sports</button>
+      <button class="filter-btn" data-genre="indie">Indie</button>
+    </div>
+  </section>
+
+  <!-- GAME GRID -->
+  <section class="games-section">
+    <div class="container">
+      <h2 class="section-title">All Games</h2>
+      <div class="game-grid" id="gameGrid"></div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured-section" id="featured">
+    <div class="container">
+      <h2 class="section-title">Featured Deal</h2>
+      <div class="featured-card">
+        <div class="featured-img">🔥</div>
+        <div class="featured-info">
+          <span class="badge">LIMITED OFFER</span>
+          <h3>Cyber Chronicles: Ultimate Edition</h3>
+          <p>Experience the definitive version with all DLC included. A sweeping open-world RPG set in a neon-lit dystopian future.</p>
+          <div class="price-row">
+            <span class="old-price">$79.99</span>
+            <span class="new-price">$29.99</span>
+            <span class="discount-badge">-63%</span>
+          </div>
+          <button class="btn-primary" onclick="addToCartById(99)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <div class="about-grid">
+        <div class="about-card">🚀<h3>Instant Delivery</h3><p>Get your game keys in seconds after purchase.</p></div>
+        <div class="about-card">🔒<h3>Secure Payments</h3><p>All transactions are encrypted and protected.</p></div>
+        <div class="about-card">💬<h3>24/7 Support</h3><p>Our team is always here to help you.</p></div>
+        <div class="about-card">💰<h3>Best Prices</h3><p>We constantly offer the lowest prices around.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 DennisGames. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART MODAL -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Your Cart</h2>
+        <button class="close-btn" id="closeCart">✕</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-footer">
+        <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
+        <button class="btn-primary" id="checkoutBtn">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

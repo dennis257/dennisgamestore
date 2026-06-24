@@ -3,250 +3,193 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DennisGames — Premium Game Marketplace</title>
+  <title>DennisGames — PC, PlayStation, Xbox &amp; More</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ░░ NAVBAR ░░ -->
-  <nav class="navbar" id="navbar">
-    <a class="logo" href="#">
-      <span class="logo-icon">◈</span>
-      <span class="logo-text">DennisGames</span>
-    </a>
-
-    <div class="nav-links">
-      <a href="#store">Store</a>
-      <a href="#trending">Trending</a>
-      <a href="#featured">Deals</a>
-      <a href="#perks">Perks</a>
-    </div>
-
-    <div class="nav-right">
-      <div class="search-wrap">
-        <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M15 15l-3-3"/></svg>
-        <input class="search-input" id="searchInput" type="text" placeholder="Search games…" />
+  <!-- NAV -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a class="logo" href="#">
+        <svg class="logo-mark" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="6" fill="#1a73e8"/>
+          <path d="M7 14h14M14 7v14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span>DennisGames</span>
+      </a>
+      <div class="nav-links">
+        <a href="#store" class="nav-link">Store</a>
+        <a href="#new-releases" class="nav-link">New Releases</a>
+        <a href="#deals" class="nav-link">Deals</a>
+        <a href="#browse" class="nav-link">Browse</a>
       </div>
-      <button class="cart-trigger" id="cartBtn" aria-label="Open cart">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span class="cart-badge" id="cartCount">0</span>
-      </button>
+      <div class="nav-actions">
+        <div class="search-field">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="7.5" cy="7.5" r="5"/><path d="M13 13l-2.5-2.5"/>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Search games, genres…" autocomplete="off" />
+        </div>
+        <button class="cart-btn" id="cartBtn">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M1 1h2l2.68 8.39A2 2 0 007.6 11h7.8a2 2 0 001.92-1.45L19 5H5"/>
+            <circle cx="8" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+            <circle cx="15" cy="16" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <!-- ░░ HERO ░░ -->
-  <section class="hero">
-    <div class="hero-bg">
-      <div class="hero-orb hero-orb-1"></div>
-      <div class="hero-orb hero-orb-2"></div>
-      <div class="hero-orb hero-orb-3"></div>
-      <div class="hero-grid"></div>
-    </div>
-    <div class="hero-inner container">
-      <div class="hero-eyebrow">
-        <span class="eyebrow-dot"></span>
-        New arrivals every week
-      </div>
-      <h1 class="hero-title">
-        Level Up<br />
-        <span class="gradient-text">Your Library</span>
-      </h1>
-      <p class="hero-sub">
-        Thousands of titles, instant delivery, unbeatable prices.<br />
-        Your next obsession is one click away.
-      </p>
-      <div class="hero-ctas">
-        <a href="#store" class="btn-primary">
-          Browse Store
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-        <a href="#featured" class="btn-ghost">View Deals</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><span class="stat-num">12K+</span><span class="stat-label">Games</span></div>
-        <div class="stat-sep"></div>
-        <div class="stat"><span class="stat-num">4.9★</span><span class="stat-label">Rating</span></div>
-        <div class="stat-sep"></div>
-        <div class="stat"><span class="stat-num">2M+</span><span class="stat-label">Players</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ░░ TRENDING ░░ -->
-  <section class="section" id="trending">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <p class="section-eyebrow">Hot right now</p>
-          <h2 class="section-title">Trending Games</h2>
+  <!-- HERO -->
+  <section class="hero" id="store">
+    <div class="hero-cover cover-99"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-inner">
+        <div class="hero-tags">
+          <span class="htag">RPG</span>
+          <span class="htag htag-deal">63% OFF — Deal of the Day</span>
         </div>
-      </div>
-      <div class="trending-row" id="trendingRow"></div>
-    </div>
-  </section>
-
-  <!-- ░░ FEATURED DEAL ░░ -->
-  <section class="featured-section" id="featured">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <p class="section-eyebrow">Limited time</p>
-          <h2 class="section-title">Featured Deal</h2>
-        </div>
-        <div class="deal-timer">
-          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 8.414l-2.707 2.707-1.414-1.414L9 9.586V5h2v5.414z"/></svg>
-          Ends in <span id="timerDisplay">11:59:42</span>
-        </div>
-      </div>
-      <div class="featured-card">
-        <div class="featured-cover">
-          <div class="featured-icon">🔥</div>
-          <div class="featured-glow"></div>
-          <div class="featured-platform-tags">
-            <span class="ptag">PC</span>
-            <span class="ptag">PS5</span>
-            <span class="ptag">Xbox</span>
-          </div>
-        </div>
-        <div class="featured-body">
-          <div class="featured-meta">
-            <span class="badge badge-hot">🔥 Deal of the Day</span>
-            <div class="star-row">
-              <span class="stars">★★★★★</span>
-              <span class="star-count">4.9 (12,843 reviews)</span>
+        <h1 class="hero-title">Cyber Chronicles<br><span>Ultimate Edition</span></h1>
+        <p class="hero-desc">The complete open-world RPG experience. All DLC, expansions, and 200+ hours of content in one definitive package. Award-winning narrative set in a near-future dystopia.</p>
+        <div class="hero-meta">
+          <div class="rating-row">
+            <div class="stars-filled">
+              <span class="star-bar" style="--pct:98%"></span>
             </div>
+            <span class="rating-val">4.9</span>
+            <span class="rating-count">12,843 ratings</span>
           </div>
-          <h3 class="featured-title">Cyber Chronicles: Ultimate Edition</h3>
-          <p class="featured-desc">
-            Experience the definitive RPG — all DLC, expansions, and the award-winning base game bundled together. A sweeping open-world journey through a neon-lit dystopian future with 200+ hours of content.
-          </p>
-          <div class="featured-tags">
-            <span class="tag">Open World</span>
-            <span class="tag">RPG</span>
-            <span class="tag">Cyberpunk</span>
-            <span class="tag">Multiplayer</span>
+          <div class="platform-row">
+            <span class="plat">PC</span>
+            <span class="plat">PS5</span>
+            <span class="plat">Xbox</span>
           </div>
-          <div class="featured-pricing">
-            <div class="price-block">
-              <span class="price-orig">$79.99</span>
-              <span class="price-now">$29.99</span>
-            </div>
-            <span class="discount-pill">−63%</span>
+        </div>
+        <div class="hero-buy">
+          <div class="hero-pricing">
+            <span class="was">Was $79.99</span>
+            <span class="now">$29.99</span>
           </div>
-          <div class="featured-actions">
-            <button class="btn-primary" onclick="addToCartById(99)">
-              Add to Cart
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </button>
-            <button class="btn-ghost btn-wishlist">♡ Wishlist</button>
-          </div>
+          <button class="btn-buy" onclick="addToCartById(99)">Add to Cart</button>
+          <button class="btn-secondary">More Info</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ░░ STORE ░░ -->
-  <section class="section" id="store">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <p class="section-eyebrow">Full catalog</p>
-          <h2 class="section-title">All Games</h2>
-        </div>
-        <div class="store-controls">
-          <div class="genre-pills" id="genrePills">
-            <button class="pill active" data-genre="all">All</button>
-            <button class="pill" data-genre="action">Action</button>
-            <button class="pill" data-genre="rpg">RPG</button>
-            <button class="pill" data-genre="strategy">Strategy</button>
-            <button class="pill" data-genre="sports">Sports</button>
-            <button class="pill" data-genre="indie">Indie</button>
-          </div>
-        </div>
-      </div>
-      <div class="game-grid" id="gameGrid"></div>
+  <!-- NEW RELEASES -->
+  <section class="shelf-section" id="new-releases">
+    <div class="shelf-head">
+      <h2 class="shelf-title">New Releases</h2>
+      <a href="#browse" class="see-all">See all <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h8M9 5l3 3-3 3"/></svg></a>
     </div>
+    <div class="shelf-track" id="newReleasesShelf"></div>
   </section>
 
-  <!-- ░░ PERKS ░░ -->
-  <section class="perks-section" id="perks">
-    <div class="container">
-      <div class="perks-grid">
-        <div class="perk-card">
-          <div class="perk-icon">⚡</div>
-          <h3>Instant Delivery</h3>
-          <p>Game keys in your inbox within seconds of purchase.</p>
-        </div>
-        <div class="perk-card">
-          <div class="perk-icon">🔐</div>
-          <h3>Secure Checkout</h3>
-          <p>256-bit encryption on every transaction.</p>
-        </div>
-        <div class="perk-card">
-          <div class="perk-icon">🎧</div>
-          <h3>24/7 Support</h3>
-          <p>Real humans ready to help around the clock.</p>
-        </div>
-        <div class="perk-card">
-          <div class="perk-icon">💸</div>
-          <h3>Price Match</h3>
-          <p>Find it cheaper? We'll beat any verified price.</p>
-        </div>
+  <!-- DEALS -->
+  <section class="shelf-section" id="deals">
+    <div class="shelf-head">
+      <h2 class="shelf-title">Special Offers</h2>
+      <div class="deal-clock">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 2"/></svg>
+        Ends in <strong id="timerDisplay">—</strong>
       </div>
     </div>
+    <div class="deals-grid" id="dealsGrid"></div>
   </section>
 
-  <!-- ░░ FOOTER ░░ -->
+  <!-- FULL BROWSE -->
+  <section class="browse-section" id="browse">
+    <div class="browse-head">
+      <h2 class="shelf-title">Browse Store</h2>
+      <div class="filter-tabs" id="filterTabs">
+        <button class="ftab active" data-genre="all">All</button>
+        <button class="ftab" data-genre="action">Action</button>
+        <button class="ftab" data-genre="rpg">RPG</button>
+        <button class="ftab" data-genre="strategy">Strategy</button>
+        <button class="ftab" data-genre="sports">Sports</button>
+        <button class="ftab" data-genre="indie">Indie</button>
+      </div>
+    </div>
+    <div class="browse-grid" id="browseGrid"></div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 2l2.09 4.26L17 7.27l-3.5 3.41.83 4.83L10 13.27l-4.33 2.24.83-4.83L3 7.27l4.91-.71z"/></svg>
+        <span>Instant Key Delivery</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="8" width="14" height="10" rx="2"/><path d="M7 8V6a3 3 0 016 0v2"/></svg>
+        <span>Secure Payments</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 3a7 7 0 100 14A7 7 0 0010 3zm0 4v3l2 2"/></svg>
+        <span>24/7 Support</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 10h14M10 3l7 7-7 7"/></svg>
+        <span>Price Match Guarantee</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="container footer-inner">
+    <div class="footer-inner">
       <div class="footer-brand">
-        <span class="logo-icon">◈</span>
-        <span class="logo-text">DennisGames</span>
-        <p>The premium destination for digital games.</p>
+        <svg class="logo-mark" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="6" fill="#1a73e8"/>
+          <path d="M7 14h14M14 7v14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="footer-name">DennisGames</span>
       </div>
-      <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Refunds</a>
+      <nav class="footer-nav">
+        <a href="#">About</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Refund Policy</a>
         <a href="#">Contact</a>
-      </div>
-      <p class="footer-copy">© 2026 DennisGames. All rights reserved.</p>
+      </nav>
+      <p class="footer-copy">© 2026 DennisGames Ltd. All rights reserved. All trademarks belong to their respective owners.</p>
     </div>
   </footer>
 
-  <!-- ░░ CART DRAWER ░░ -->
-  <div class="drawer-overlay" id="cartOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer">
-    <div class="drawer-head">
-      <div>
-        <h2>Your Cart</h2>
-        <p class="drawer-sub" id="drawerSub">0 items</p>
+  <!-- CART DRAWER -->
+  <div class="overlay" id="cartOverlay"></div>
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <span>Cart</span>
+        <span class="drawer-count" id="drawerCount">0 items</span>
       </div>
-      <button class="drawer-close" id="closeCart" aria-label="Close cart">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l12 12M16 4L4 16"/></svg>
+      <button class="drawer-close" id="closeCart">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 2l14 14M16 2L2 16"/></svg>
       </button>
     </div>
-    <div class="drawer-body" id="cartItems"></div>
-    <div class="drawer-foot">
-      <div class="drawer-totals">
-        <div class="totals-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
-        <div class="totals-row totals-total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+    <div class="drawer-items" id="cartItems"></div>
+    <div class="drawer-footer">
+      <div class="drawer-total-row">
+        <span>Subtotal</span><span id="cartSubtotal">$0.00</span>
       </div>
-      <button class="btn-checkout" id="checkoutBtn">
-        Checkout
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </button>
-      <p class="checkout-note">🔒 Secure · Instant delivery · Money-back guarantee</p>
+      <div class="drawer-total-row drawer-grand">
+        <span>Total</span><span id="cartTotal">$0.00</span>
+      </div>
+      <button class="btn-checkout" id="checkoutBtn">Proceed to Checkout</button>
+      <p class="drawer-note">Secure checkout · Instant delivery · 30-day refunds</p>
     </div>
   </aside>
 
-  <!-- ░░ TOAST ░░ -->
-  <div class="toast" id="toast">
-    <span class="toast-icon">✓</span>
-    <span id="toastMsg"></span>
-  </div>
+  <!-- TOAST -->
+  <div class="toast" id="toast"><span id="toastMsg"></span></div>
 
   <script src="app.js"></script>
 </body>

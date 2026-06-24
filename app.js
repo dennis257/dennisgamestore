@@ -4,9 +4,9 @@
 // When running via `node server.js`, games come from the API.
 // When opening index.html directly (no server), we fall back to
 // the bundled GAMES array so the site still works offline.
-const API_BASE = window.location.port === '3000'
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:3000'
-  : null;
+  : 'https://dennisgamestore.onrender.com';
 
 /* ─────────────────────────────────────────────────────────────
    FALLBACK GAME DATA (used when no backend is running)
